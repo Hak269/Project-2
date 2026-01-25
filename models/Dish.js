@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const dishSchema = new mongoose.Schema(
   {
+  dishName: {
+    type: String,
+    required: true,
+  },
   ingredients: [{ 
     type: mongoose.Schema.Types.ObjectId,
     required: true,

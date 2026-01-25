@@ -21,6 +21,6 @@ const dishSchema = new mongoose.Schema(
   },  
 });
 
-const Dish = mongoose.model("Dish", dishSchema);
+const Inventory = mongoose.model("Inventory", dishSchema);
 
-module.exports = Dish;
+module.exports = Inventory;

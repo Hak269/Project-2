@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  table: {
+  tableName: {
     type: String,
     required: true,
     enum: ["User", "Order", "Dish", "Inventory"]
@@ -22,6 +22,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-const User = mongoose.model("User", userSchema);
+const Log = mongoose.model("Log", userSchema);
 
-module.exports = User;
+module.exports = Log;
