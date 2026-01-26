@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+</head>
+<body>
+    <form action="/orders/new" method="post">
+        <label for="dishes">Dishes</label>
+        <select name="dishes" id="dishes">
+            <option value="orange">Orange 8 BHD</option>
+            <option value="Kebab">Kebab 10 BHD</option>
+            <option value="orange">Shawarma 6 BHD</option>
+        </select>
+        <br>
+        <br>
+        <label for="orderType">Order Type: </label>
+        <input type="radio" name="orderType" value="takeAway">
+        <label for="takeAway">Take Away</label>
+        <input type="radio" name="orderType" value="delivery">
+        <label for="delivery">Delivery</label>
+        <input type="radio" name="orderType" value="dineIn">
+        <label for="dineIn">Dine In</label>
+        <br>
+        <br>
+        <label for="totalPrice">Total Price: </label>
+        <input type="text" name="totalPrice" id="totalPrice">
+        <button type="submit">Add Order</button>
+    </form>
+</body>
+</html>

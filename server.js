@@ -6,6 +6,7 @@ const mongoose = require("mongoose")
 const morgan = require('morgan')
 const authController = require("./controllers/auth.js");
 const indexController = require("./controllers/index.routes.js");
+const orderController = require("./controllers/order.routes.js");
 const session = require('express-session');
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
@@ -65,6 +66,7 @@ connectToDB() // connect to database
 // Routes go here
 app.use('/auth',authController)
 app.use('/',indexController)
+app.use('/order',orderController)
 
 
 // PROTECTED ROUTES:
