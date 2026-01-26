@@ -6,7 +6,7 @@
     <title>New Order</title>
 </head>
 <body>
-    <form action="/orders/new" method="post">
+    <form action="/order/create" method="post">
         <label for="dishes">Dishes</label>
         <select name="dishes" id="dishes">
             <option value="orange">Orange 8 BHD</option>
@@ -26,6 +26,7 @@
         <br>
         <label for="totalPrice">Total Price: </label>
         <input type="text" name="totalPrice" id="totalPrice">
+        <input type="hidden" name="servedBy" value="Husain">
         <button type="submit">Add Order</button>
     </form>
 </body>
