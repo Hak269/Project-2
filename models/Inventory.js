@@ -15,13 +15,14 @@ const inventorySchema = new mongoose.Schema(
     required: true,
   },
   unit: {
-    type: Number,
+    type: String,
     required: true,
-    enum: ["gram", "Liter", "tsp", "tbsp", "Cup"]
+    enum: ["gram", "Liter", "tsp", "tbsp", "Cup", "piece"]
   },
   menueYN: {
     type: Boolean,
     required: true,
+    default: false,
   }
 });
 

@@ -7,7 +7,16 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/create', async (req,res)=>{
-    const addNew = await Inventory.create(req.body)
+    
+    const inventoryItem = {
+        item: req.body.item,
+        category: req.body.category,
+        quantity: Number(req.body.quantity),
+        unit: req.body.unit,
+        menueYN: req.body.menuYN === "true"
+    };
+
+    const addNew = await Inventory.create(inventoryItem)
     res.redirect("/")
 })
 

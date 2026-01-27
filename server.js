@@ -7,6 +7,8 @@ const morgan = require('morgan')
 const authController = require("./controllers/auth.js");
 const indexController = require("./controllers/index.routes.js");
 const orderController = require("./controllers/order.routes.js");
+const recipeController = require("./controllers/recipes.routes.js");
+const inventoryController = require("./controllers/inventory.routes.js");
 const session = require('express-session');
 const isSignedIn = require("./middleware/is-signed-in.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
@@ -67,6 +69,8 @@ connectToDB() // connect to database
 app.use('/auth',authController)
 app.use('/',indexController)
 app.use('/order',orderController)
+app.use('/inventory',inventoryController)
+app.use('/recipe',recipeController)
 
 
 // PROTECTED ROUTES:

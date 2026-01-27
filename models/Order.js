@@ -6,7 +6,7 @@ const orderSchema = new mongoose.Schema({
     dish:{
     type: mongoose.Schema.Types.ObjectId,
     required: true,
-    ref: 'Dish'
+    ref: 'Recipe'
   }, 
   quantity: Number
   }],

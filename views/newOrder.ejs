@@ -8,10 +8,10 @@
 <body>
     <form action="/order/create" method="post">
         <label for="dishes">Dishes</label>
-        <select name="dishes" id="dishes">
-            <option value="orange">Orange 8 BHD</option>
-            <option value="Kebab">Kebab 10 BHD</option>
-            <option value="orange">Shawarma 6 BHD</option>
+        <select name="dishes" id="dishes" multiple>
+        <% recipes.forEach(recipe => { %>
+            <option value="<%= recipe._id %>"><%= recipe.recipeName %> <%= recipe.price %></option>
+        <% }); %>
         </select>
         <br>
         <br>
@@ -26,7 +26,7 @@
         <br>
         <label for="totalPrice">Total Price: </label>
         <input type="text" name="totalPrice" id="totalPrice">
-        <input type="hidden" name="servedBy" value="Husain">
+        <input type="hidden" name="servedBy" value="6978f22d43d555270cfc3312">
         <button type="submit">Add Order</button>
     </form>
 </body>

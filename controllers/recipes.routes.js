@@ -9,8 +9,8 @@ router.get('/',(req,res)=>{
 
 router.post('/create', async (req,res)=>{
     const recipe = {
-    recipeName: req.body.recipeName,        
-    ingredients: req.body.ingredients,      
+    recipeName: req.body.recipeName,
+    ingredients: req.body.ingredients,
     price: req.body.price,
     instructions: req.body.instructions
         .split('\n')

@@ -8,14 +8,13 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/create', async (req,res)=>{
-    console.log(req.body)
     const addNew = await Order.create(req.body)
-    console.log(addNew)
     res.redirect("/")
 })
 
 router.get('/create',(req,res)=>{
-    res.render('newOrder.ejs')
+    const recipes = Recipe.find()
+    res.render('newOrder.ejs', {recipes: recipes})
 })
 
 
