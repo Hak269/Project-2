@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const dishSchema = new mongoose.Schema(
   {
-  ingredientName: { 
+  item: { 
     type: String,
     required: true,
   },
@@ -18,7 +18,11 @@ const dishSchema = new mongoose.Schema(
     type: Number,
     required: true,
     enum: ["gram", "Liter", "tsp", "tbsp", "Cup"]
-  },  
+  },
+  menueYN: {
+    type: Boolean,
+    required: true,
+  }
 });
 
 const Inventory = mongoose.model("Inventory", dishSchema);
