@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const dishSchema = new mongoose.Schema(
+const inventorySchema = new mongoose.Schema(
   {
   item: { 
     type: String,
@@ -25,6 +25,6 @@ const dishSchema = new mongoose.Schema(
   }
 });
 
-const Inventory = mongoose.model("Inventory", dishSchema);
+const Inventory = mongoose.model("Inventory", inventorySchema);
 
 module.exports = Inventory;

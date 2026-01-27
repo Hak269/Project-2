@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+</head>
+<body>
+    <form action="/recipe/create" method="post">
+        <label for="recipeName">Recipe Name: </label>
+        <input type="text" name="recipeName" id="recipeName">
+        <br>
+        <br>
+        <label for="ingredients">Ingredients</label>
+        <select name="ingredients" id="ingredients" multiple>
+            <% inventory.forEach(item => { %>
+                <option value="<%= item._id %>"><%= item.item %></option>
+            <% }); %>
+        </select>
+        <br>
+        <br>
+        <label for="price">Price: </label>
+        <input type="text" name="price" id="price">
+        <label for="instructions">Instructions: (one line per step)</label>
+        <textarea id="instructions" name="instructions" rows="15" cols="40"></textarea>
+        <button type="submit">Add Order</button>
+    </form>
+</body>
+</html>
