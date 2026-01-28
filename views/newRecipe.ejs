@@ -12,17 +12,21 @@
         <br>
         <br>
         <label for="ingredients">Ingredients</label>
-        <select name="ingredients" id="ingredients" multiple>
-            <% inventory.forEach(item => { %>
-                <option value="<%= item._id %>"><%= item.item %></option>
-            <% }); %>
-        </select>
+            <select name="ingredients" id="ingredients" multiple>
+                <% inventory.forEach(item => { %>
+                    <option value="<%= item._id %>"><%= item.item %></option>
+                <% }); %>
+            </select>
         <br>
         <br>
         <label for="price">Price: </label>
         <input type="text" name="price" id="price">
-        <label for="instructions">Instructions: (one line per step)</label>
+        <br>
+        <br>
+        <label for="instructions">Instructions: (one line per step):</label>
         <textarea id="instructions" name="instructions" rows="15" cols="40"></textarea>
+        <br>
+        <br>
         <button type="submit">Add Order</button>
     </form>
 </body>

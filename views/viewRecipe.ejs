@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= recipe.recipeName %></title>
+</head>
+<body>
+    <h1><%= recipe.recipeName %></h1>
+
+
+    
+    <p>Recipe Name: <%= recipe.recipeName %></p>
+    <p>Ingredients: <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
+    <p>Price: <%= recipe.price %> BD</p>
+    <p>Instructions: <%= recipe.instructions %></p>
+    
+</body>
+</html>

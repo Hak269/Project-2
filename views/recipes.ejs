@@ -10,9 +10,15 @@
 
     <% recipes.forEach(recipe => {%>
         <p>Recipe Name: <%= recipe.recipeName %></p>
-        <p>Ingredients: <%= recipe.Ingredients %></p>
-        <p>Price: <%= recipe.Price %></p>
-        <p>instructions: <%= recipe.instructions %></p>
-    <% }); %>
+        <p>Ingredients: <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
+        <p>Price: <%= recipe.price %> BD</p>
+        <p>Instructions: <%= recipe.instructions %></p>
+
+        <a href="/recipe/<%=recipe._id%>/edit">Edit</a>
+        <a href="/recipe/<%=recipe._id%>">View</a>
+        <form action="/recipe/<%= recipe._id %>/delete" method="post">
+            <button type="submit">Delete Recipe</button>
+        </form>
+        <% }); %>
 </body>
 </html>
