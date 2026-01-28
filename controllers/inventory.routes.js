@@ -1,8 +1,8 @@
 const router = require("express").Router()
 const Inventory = require("../models/Inventory")
 
-router.get('/',(req,res)=>{
-    const inventory = Inventory.find()
+router.get('/',async (req,res)=>{
+    const inventory = await Inventory.find()
     res.render('inventory.ejs', {inventory: inventory})
 })
 
@@ -13,7 +13,7 @@ router.post('/create', async (req,res)=>{
         category: req.body.category,
         quantity: Number(req.body.quantity),
         unit: req.body.unit,
-        menueYN: req.body.menuYN === "true"
+        menuYN: req.body.menuYN === "true"
     };
 
     const addNew = await Inventory.create(inventoryItem)

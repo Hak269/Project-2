@@ -2,8 +2,8 @@ const router = require("express").Router()
 const Recipe = require("../models/Recipe")
 const Inventory = require("../models/Inventory")
 
-router.get('/',(req,res)=>{
-    const recipes = Recipe.find()
+router.get('/', async(req,res)=>{
+    const recipes = await Recipe.find()
     res.render('recipes.ejs', {recipes: recipes})
 })
 

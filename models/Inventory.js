@@ -19,7 +19,7 @@ const inventorySchema = new mongoose.Schema(
     required: true,
     enum: ["gram", "Liter", "tsp", "tbsp", "Cup", "piece"]
   },
-  menueYN: {
+  menuYN: {
     type: Boolean,
     required: true,
     default: false,
