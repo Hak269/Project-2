@@ -15,7 +15,14 @@
         <p>Unit: <%= item.unit %></p>
         <p>Is in in the menu: <%= item.menuYN %></p>
         <br>
-        <p> ------</p>
+
+        <a href="/inventory/<%=item._id%>/edit">Edit</a>
+        <a href="/inventory/<%=item._id%>">View</a>
+        <form action="/inventory/<%= item._id %>/delete" method="post">
+            <button type="submit">Delete Item</button>
+        </form>
+
+        <p> -------------------</p>
     <% }); %>
 </body>
 </html>

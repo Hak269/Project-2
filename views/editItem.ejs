@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Order</title>
+</head>
+<body>
+    <form action="/inventory/<%= item._id %>/edit" method="post">
+        <label for="item">Item</label>
+        <input type="text" name="item" id="item" value="<%= item.item %>" disabled>
+        <br>
+        <br>
+        <label for="category">Category</label>
+        <select name="category" id="category">
+            <option value="fruits" <%= item.category === 'fruits' ? 'selected' : '' %>>Fruits</option>
+            <option value="drinks" <%= item.category === 'drinks' ? 'selected' : '' %>>Drinks</option>
+            <option value="spices" <%= item.category === 'spices' ? 'selected' : '' %>>Spices</option>
+        </select>
+        <br>
+        <br>
+        <label for="quantity">Quantity: </label>
+        <input type="number" id="quantity" name="quantity" min="0" value="<%= item.quantity %>">
+
+        <label for="unit">Unit</label>
+        <select name="unit" id="unit">
+            <option value="gram" <%= item.unit === 'gram' ? 'selected' : '' %>>Gram</option>
+            <option value="liter" <%= item.unit === 'liter' ? 'selected' : '' %>>Liter</option>
+            <option value="tsp" <%= item.unit === 'tsp' ? 'selected' : '' %>>tsp</option>
+            <option value="piece" <%= item.unit === 'piece' ? 'selected' : '' %>>piece</option>
+        </select>
+        <label for="menuYN">is it in menu?: </label>
+        <input type="checkbox" id="menuYN" name="menuYN" value="true" <%= item.menuYN ? 'checked' : '' %>>        
+        <button type="submit">Edit Item</button>
+    </form>
+</body>
+</html>
