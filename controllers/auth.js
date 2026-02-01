@@ -58,10 +58,31 @@ router.post("/sign-in", async (req, res) => {
   // If there is other data you want to save to `req.session.user`, do so here!
   req.session.user = {
     username: userInDatabase.username,
-    _id: userInDatabase._id
+    _id: userInDatabase._id,
+    role: userInDatabase.role
   };
 
-  res.redirect("/order");
+  let redirectedPage = "order";
+
+  console.log(req.session.user.role)
+
+  switch(req.session.user.role) {
+    case "chef":
+      redirectedPage = "/order"
+      break;
+    case "admin":
+      redirectedPage = "/order"
+      break;
+    case "server":
+      redirectedPage = "/order"
+      break;
+    case "accountant":
+      redirectedPage = "/inventory"
+      break;
+    default:
+      redirectedPage = "/order"
+  }  
+  res.redirect(redirectedPage);
 });
 
 
@@ -70,7 +91,10 @@ router.get("/sign-out", (req, res) => {
   res.redirect("/");
 });
 
-
+router.get("/denied", (req, res) => {
+  req.session.destroy();
+  res.render("auth/acessDenied.ejs");
+});
 
 
 

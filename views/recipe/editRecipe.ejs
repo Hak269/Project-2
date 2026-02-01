@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= recipe.recipeName %></title>
+    <link rel="stylesheet" href="/css/style.css"></head>
 </head>
 <body>
     <%- include('../navbar') %>
@@ -12,7 +13,7 @@
 
     <form action="/recipe/<%=recipe._id%>/edit" method="post">
         <label for="recipeName">Recipe Name: </label>
-        <input type="text" name="recipeName" id="recipeName" value="<%= recipe.recipeName %>">
+        <input type="text" name="recipeName" id="recipeName" value="<%= recipe.recipeName %>" disabled>
         <br>
         <br>
         <label for="ingredients">Ingredients</label>

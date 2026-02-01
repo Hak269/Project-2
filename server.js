@@ -11,6 +11,7 @@ const recipeController = require("./controllers/recipes.routes.js");
 const inventoryController = require("./controllers/inventory.routes.js");
 const session = require('express-session');
 const isSignedIn = require("./middleware/is-signed-in.js");
+const isAllowed = require("./middleware/check-role.js");
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const methodOverride = require('method-override')
 
@@ -75,6 +76,7 @@ app.use('/recipe',recipeController)
 
 // PROTECTED ROUTES:
 app.use(isSignedIn)
+//app.use(isAllowed)
 // Everything under the user NEEDS to be logged in to se
 
 

@@ -40,12 +40,12 @@
       <label>Order Type:</label><br>
       <input type="radio" name="orderType" value="Take Away"> Take Away
       <input type="radio" name="orderType" value="Delivery"> Delivery
-      <input type="radio" name="orderType" value="Dine In"> Dine In<br><br>
+      <input type="radio" name="orderType" value="Dine In" checked="checked"> Dine In<br><br>
 
       <label>Total Price:</label>
       <input type="number" name="totalPrice" id="totalPrice" readonly><br><br>
 
-      <input type="hidden" name="servedBy" value="6978f22d43d555270cfc3312">
+      <input type="hidden" name="servedBy" value="<%= user._id %>">
       <button type="submit">✅ Place Order</button>
     </form>
   </div>

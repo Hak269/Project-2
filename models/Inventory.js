@@ -17,7 +17,6 @@ const inventorySchema = new mongoose.Schema(
   unit: {
     type: String,
     required: true,
-    enum: ["gram", "Liter", "tsp", "tbsp", "Cup", "piece"]
   },
   menuYN: {
     type: Boolean,

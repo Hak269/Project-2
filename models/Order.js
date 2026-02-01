@@ -25,7 +25,7 @@ const orderSchema = new mongoose.Schema({
   orderType: {
     type: String,
     required: true,
-    enum: ["Take Away", "Delivery", "Dine in"]
+    enum: ["Take Away", "Delivery", "Dine In"]
   },
   servedBy:  {
         type: mongoose.Schema.Types.ObjectId,
