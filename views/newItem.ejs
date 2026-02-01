@@ -1,37 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Order</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Inventory Item</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      transition: border 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    .checkbox-group {
+      margin: 10px 0;
+      color: #34495e;
+    }
+    button {
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background: #219150;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>➕ New Inventory Item</h1>
     <form action="/inventory/create" method="post">
-        <label for="item">Item</label>
-        <input type="text" name="item" id="item">
-        <br>
-        <br>
-        <label for="category">Category</label>
-        <select name="category" id="category">
-            <option value="fruits">Fruits</option>
-            <option value="drinks">Drinks</option>
-            <option value="spices">Spices</option>
-        </select>
-        <br>
-        <br>
-        <label for="quantity">Quantity: </label>
-        <input type="number" id="quantity" name="quantity" min="0">
+      <label for="item">Item</label>
+      <input type="text" name="item" id="item" required>
 
-        <label for="unit">Unit</label>
-        <select name="unit" id="unit">
-            <option value="gram">Gram</option>
-            <option value="liter">Liter</option>
-            <option value="tsp">tsp</option>
-            <option value="piece">piece</option>
-        </select>
-        <label for="menuYN">is it in menu?: </label>
-        <input type="checkbox" id="menuYN" name="menuYN" value="true">
-        <button type="submit">Add Order</button>
+      <label for="category">Category</label>
+      <select name="category" id="category" required>
+        <option value="fruits">Fruits</option>
+        <option value="vegetables">Vegetables</option>
+        <option value="meat">Meat</option>
+        <option value="seafood">Seafood</option>
+        <option value="dairy">Dairy</option>
+        <option value="grains">Grains</option>
+        <option value="spices">Spices</option>
+        <option value="drinks">Drinks</option>
+        <option value="sauces">Sauces</option>
+        <option value="bakery">Bakery</option>
+        <option value="frozen">Frozen</option>
+        <option value="condiments">Condiments</option>
+        <option value="others">Others</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="0" required>
+
+      <label for="unit">Unit</label>
+      <select name="unit" id="unit" required>
+        <option value="gram">Gram</option>
+        <option value="kilogram">Kilogram</option>
+        <option value="liter">Liter</option>
+        <option value="milliliter">Milliliter</option>
+        <option value="tsp">Teaspoon</option>
+        <option value="tbsp">Tablespoon</option>
+        <option value="piece">Piece</option>
+        <option value="pack">Pack</option>
+      </select>
+
+      <div class="checkbox-group">
+        <label for="menuYN">
+          <input type="checkbox" id="menuYN" name="menuYN" value="true">
+          Is it in menu?
+        </label>
+      </div>
+
+      <button type="submit">✅ Add Item</button>
     </form>
+  </div>
 </body>
 </html>

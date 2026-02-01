@@ -1,37 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Order</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Inventory Item</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input[type="text"], input[type="number"], select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      transition: border 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    .checkbox-group {
+      margin: 10px 0;
+      color: #34495e;
+    }
+    button {
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background: #219150;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #3498db;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .back-btn:hover {
+      background: #2980b9;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>✏️ Edit Inventory Item</h1>
     <form action="/inventory/<%= item._id %>/edit" method="post">
-        <label for="item">Item</label>
-        <input type="text" name="item" id="item" value="<%= item.item %>" disabled>
-        <br>
-        <br>
-        <label for="category">Category</label>
-        <select name="category" id="category">
-            <option value="fruits" <%= item.category === 'fruits' ? 'selected' : '' %>>Fruits</option>
-            <option value="drinks" <%= item.category === 'drinks' ? 'selected' : '' %>>Drinks</option>
-            <option value="spices" <%= item.category === 'spices' ? 'selected' : '' %>>Spices</option>
-        </select>
-        <br>
-        <br>
-        <label for="quantity">Quantity: </label>
-        <input type="number" id="quantity" name="quantity" min="0" value="<%= item.quantity %>">
+      <label for="item">Item</label>
+      <input type="text" name="item" id="item" value="<%= item.item %>" disabled>
 
-        <label for="unit">Unit</label>
-        <select name="unit" id="unit">
-            <option value="gram" <%= item.unit === 'gram' ? 'selected' : '' %>>Gram</option>
-            <option value="liter" <%= item.unit === 'liter' ? 'selected' : '' %>>Liter</option>
-            <option value="tsp" <%= item.unit === 'tsp' ? 'selected' : '' %>>tsp</option>
-            <option value="piece" <%= item.unit === 'piece' ? 'selected' : '' %>>piece</option>
-        </select>
-        <label for="menuYN">is it in menu?: </label>
-        <input type="checkbox" id="menuYN" name="menuYN" value="true" <%= item.menuYN ? 'checked' : '' %>>        
-        <button type="submit">Edit Item</button>
+      <label for="category">Category</label>
+      <select name="category" id="category" required>
+        <option value="fruits" <%= item.category === 'fruits' ? 'selected' : '' %>>Fruits</option>
+        <option value="vegetables" <%= item.category === 'vegetables' ? 'selected' : '' %>>Vegetables</option>
+        <option value="meat" <%= item.category === 'meat' ? 'selected' : '' %>>Meat</option>
+        <option value="seafood" <%= item.category === 'seafood' ? 'selected' : '' %>>Seafood</option>
+        <option value="dairy" <%= item.category === 'dairy' ? 'selected' : '' %>>Dairy</option>
+        <option value="grains" <%= item.category === 'grains' ? 'selected' : '' %>>Grains</option>
+        <option value="spices" <%= item.category === 'spices' ? 'selected' : '' %>>Spices</option>
+        <option value="drinks" <%= item.category === 'drinks' ? 'selected' : '' %>>Drinks</option>
+        <option value="sauces" <%= item.category === 'sauces' ? 'selected' : '' %>>Sauces</option>
+        <option value="bakery" <%= item.category === 'bakery' ? 'selected' : '' %>>Bakery</option>
+        <option value="frozen" <%= item.category === 'frozen' ? 'selected' : '' %>>Frozen</option>
+        <option value="condiments" <%= item.category === 'condiments' ? 'selected' : '' %>>Condiments</option>
+        <option value="others" <%= item.category === 'others' ? 'selected' : '' %>>Others</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="0" value="<%= item.quantity %>" required>
+
+      <label for="unit">Unit</label>
+      <select name="unit" id="unit" required>
+        <option value="gram" <%= item.unit === 'gram' ? 'selected' : '' %>>Gram</option>
+        <option value="kilogram" <%= item.unit === 'kilogram' ? 'selected' : '' %>>Kilogram</option>
+        <option value="liter" <%= item.unit === 'liter' ? 'selected' : '' %>>Liter</option>
+        <option value="milliliter" <%= item.unit === 'milliliter' ? 'selected' : '' %>>Milliliter</option>
+        <option value="tsp" <%= item.unit === 'tsp' ? 'selected' : '' %>>Teaspoon</option>
+        <option value="tbsp" <%= item.unit === 'tbsp' ? 'selected' : '' %>>Tablespoon</option>
+        <option value="piece" <%= item.unit === 'piece' ? 'selected' : '' %>>Piece</option>
+        <option value="pack" <%= item.unit === 'pack' ? 'selected' : '' %>>Pack</option>
+      </select>
+
+      <div class="checkbox-group">
+        <label for="menuYN">
+          <input type="checkbox" id="menuYN" name="menuYN" value="true" <%= item.menuYN ? 'checked' : '' %>>
+          Is it in menu?
+        </label>
+      </div>
+
+      <button type="submit">💾 Save Changes</button>
     </form>
+    <a href="/inventory" class="back-btn">⬅ Back to Inventory</a>
+  </div>
 </body>
 </html>
