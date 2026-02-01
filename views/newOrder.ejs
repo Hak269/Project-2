@@ -1,33 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Order</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Order</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 20px;
+    }
+    .dish-card {
+      background: #fdfdfd;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px;
+      width: 220px;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dish-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .dish-card strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      color: #34495e;
+    }
+    .dish-card span {
+      color: #27ae60;
+      font-weight: bold;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      width: 350px;
+      position: relative;
+      text-align: left;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+    .modal-content h3 {
+      margin-top: 0;
+      color: #2c3e50;
+    }
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      cursor: pointer;
+      font-size: 20px;
+      color: #888;
+    }
+    .close-btn:hover {
+      color: #000;
+    }
+    button {
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 15px;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #219150;
+    }
+    .order-summary {
+      margin-top: 30px;
+      text-align: left;
+    }
+    .order-summary h3 {
+      color: #2c3e50;
+    }
+    .order-summary div {
+      margin: 8px 0;
+      padding: 8px;
+      background: #f7f7f7;
+      border-radius: 6px;
+    }
+    input[type="number"], textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .remove-btn {
+      color: red;
+      cursor: pointer;
+      margin-left: 10px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-    <form action="/order/create" method="post">
-        <label for="dishes">Dishes</label>
-        <select name="dishes" id="dishes" multiple>
-        <% recipes.forEach(recipe => { %>
-            <option value="<%= recipe._id %>"><%= recipe.recipeName %> <%= recipe.price %></option>
-        <% }); %>
-        </select>
-        <br>
-        <br>
-        <label for="orderType">Order Type: </label>
-        <input type="radio" name="orderType" value="takeAway">
-        <label for="takeAway">Take Away</label>
-        <input type="radio" name="orderType" value="delivery">
-        <label for="delivery">Delivery</label>
-        <input type="radio" name="orderType" value="dineIn">
-        <label for="dineIn">Dine In</label>
-        <br>
-        <br>
-        <label for="totalPrice">Total Price: </label>
-        <input type="text" name="totalPrice" id="totalPrice">
-        <input type="hidden" name="servedBy" value="6978f22d43d555270cfc3312">
-        <button type="submit">Add Order</button>
+  <div class="container">
+    <h2>🍴 Place Your Order</h2>
+    <div id="dishContainer">
+      <% recipes.forEach(recipe => { %>
+        <div class="dish-card" onclick="openModal('<%= recipe._id %>', '<%= recipe.recipeName %>', <%= recipe.price %>)">
+          <strong><%= recipe.recipeName %></strong>
+          <span>$<%= recipe.price %></span>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="dishModal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">×</span>
+        <h3 id="modalTitle"></h3>
+        <p>Price: $<span id="modalPrice"></span></p>
+        <label>Quantity:</label>
+        <input type="number" id="modalQty" min="1" value="1"><br><br>
+        <label>Item Notes:</label>
+        <textarea id="modalNotes" rows="3" placeholder="Optional"></textarea><br><br>
+        <button onclick="addToOrder()">Add to Order</button>
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <form action="/order/create" method="post" class="order-summary">
+      <h3>📝 Order Summary</h3>
+      <div id="orderList"></div>
+      
+      <label>Order Type:</label><br>
+      <input type="radio" name="orderType" value="Take Away"> Take Away
+      <input type="radio" name="orderType" value="Delivery"> Delivery
+      <input type="radio" name="orderType" value="Dine In"> Dine In<br><br>
+
+      <label>Total Price:</label>
+      <input type="number" name="totalPrice" id="totalPrice" readonly><br><br>
+
+      <input type="hidden" name="servedBy" value="6978f22d43d555270cfc3312">
+      <button type="submit">✅ Place Order</button>
     </form>
+  </div>
+
+  <script>
+    let selectedDish = {};
+    let orderItems = [];
+
+    function openModal(id, name, price) {
+      selectedDish = { id, name, price };
+      document.getElementById('modalTitle').innerText = name;
+      document.getElementById('modalPrice').innerText = price.toFixed(2);
+      document.getElementById('modalQty').value = 1;
+      document.getElementById('modalNotes').value = '';
+      document.getElementById('dishModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('dishModal').style.display = 'none';
+    }
+
+    function addToOrder() {
+      const qty = parseInt(document.getElementById('modalQty').value);
+      const notes = document.getElementById('modalNotes').value;
+      const total = selectedDish.price * qty;
+
+      orderItems.push({
+        dish: selectedDish.id,
+        name: selectedDish.name,
+        price: selectedDish.price,
+        quantity: qty,
+        notes: notes,
+        total: total
+      });
+
+      updateOrderList();
+      closeModal();
+    }
+
+    function removeItem(index) {
+      orderItems.splice(index, 1);
+      updateOrderList();
+    }
+
+    function updateOrderList() {
+      const container = document.getElementById('orderList');
+      container.innerHTML = '';
+      let totalPrice = 0;
+
+      orderItems.forEach((item, index) => {
+        totalPrice += item.total;
+        container.innerHTML += `
+        <div>
+          <strong>${item.name}</strong> x ${item.quantity} - $${item.total.toFixed(2)}
+          <span class="remove-btn" onclick="removeItem(${index})">✖</span>
+          <input type="hidden" name="dishes[${index}][dish]" value="${item.dish}">
+          <input type="hidden" name="dishes[${index}][quantity]" value="${item.quantity}">
+          <input type="hidden" name="dishes[${index}][specialRequest]" value="${item.notes}">
+        </div>
+      `;
+      });
+
+      document.getElementById('totalPrice').value = totalPrice.toFixed(2);
+    }
+  </script>
 </body>
 </html>
