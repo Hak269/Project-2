@@ -1,14 +1,15 @@
 const router = require("express").Router()
 const Recipe = require("../models/Recipe")
 const Inventory = require("../models/Inventory")
+const isSignedIn = require('../middleware/is-signed-in');
 
-router.get('/', async(req,res)=>{
+router.get('/', isSignedIn, async(req,res)=>{
     const recipes = await Recipe.find().populate("ingredients")
     console.log(recipes)
     res.render('./recipe/recipes.ejs', {recipes: recipes})
 })
 
-router.post('/create', async (req,res)=>{
+router.post('/create', isSignedIn, async (req,res)=>{
     const recipe = {
     recipeName: req.body.recipeName,
     ingredients: req.body.ingredients,
@@ -22,19 +23,19 @@ router.post('/create', async (req,res)=>{
     res.redirect("/recipe")
 })
 
-router.get('/create', async (req,res)=>{
+router.get('/create', isSignedIn, async (req,res)=>{
     const inventory = await Inventory.find()
     res.render('./recipe/newRecipe.ejs', {inventory: inventory})
 })
 
 
-router.get('/:id/edit', async(req,res)=>{
+router.get('/:id/edit', isSignedIn, async(req,res)=>{
     const inventory = await Inventory.find()
     const recipe = await Recipe.findById(req.params.id).populate('ingredients')
     res.render('./recipe/EditRecipe.ejs', {recipe: recipe, inventory: inventory})
 })
 
-router.post('/:id/edit', async(req,res)=>{
+router.post('/:id/edit', isSignedIn, async(req,res)=>{
     const recipe = {
     recipeName: req.body.recipeName,
     ingredients: req.body.ingredients,
@@ -48,12 +49,12 @@ router.post('/:id/edit', async(req,res)=>{
     res.redirect('/recipe')
 })
 
-router.get('/:id', async(req,res)=>{
+router.get('/:id', isSignedIn, async(req,res)=>{
     const recipe = await Recipe.findById(req.params.id).populate('ingredients')
     res.render('./recipe/viewRecipe.ejs', {recipe: recipe})
 })
 
-router.post('/:id/delete', async(req,res)=>{
+router.post('/:id/delete', isSignedIn, async(req,res)=>{
     const recipe = await Recipe.findByIdAndDelete(req.params.id)
     res.redirect('/recipe')
 })
