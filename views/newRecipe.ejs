@@ -1,33 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Order</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Recipe</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 25px;
+    }
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-weight: bold;
+      color: #34495e;
+    }
+    input[type="text"], select, textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      transition: border 0.3s ease;
+    }
+    input[type="text"]:focus, select:focus, textarea:focus {
+      border-color: #3498db;
+      outline: none;
+    }
+    button {
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+      display: block;
+      margin: 0 auto;
+    }
+    button:hover {
+      background: #219150;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>➕ New Recipe</h1>
     <form action="/recipe/create" method="post">
-        <label for="recipeName">Recipe Name: </label>
-        <input type="text" name="recipeName" id="recipeName">
-        <br>
-        <br>
-        <label for="ingredients">Ingredients</label>
-            <select name="ingredients" id="ingredients" multiple>
-                <% inventory.forEach(item => { %>
-                    <option value="<%= item._id %>"><%= item.item %></option>
-                <% }); %>
-            </select>
-        <br>
-        <br>
-        <label for="price">Price: </label>
-        <input type="text" name="price" id="price">
-        <br>
-        <br>
-        <label for="instructions">Instructions: (one line per step):</label>
-        <textarea id="instructions" name="instructions" rows="15" cols="40"></textarea>
-        <br>
-        <br>
-        <button type="submit">Add Order</button>
+      <label for="recipeName">Recipe Name:</label>
+      <input type="text" name="recipeName" id="recipeName" required>
+
+      <label for="ingredients">Ingredients:</label>
+      <select name="ingredients" id="ingredients" multiple required>
+        <% inventory.forEach(item => { %>
+          <option value="<%= item._id %>"><%= item.item %></option>
+        <% }); %>
+      </select>
+
+      <label for="price">Price (BD):</label>
+      <input type="text" name="price" id="price" required>
+
+      <label for="instructions">Instructions (one line per step):</label>
+      <textarea id="instructions" name="instructions" rows="10" required></textarea>
+
+      <button type="submit">✅ Add Recipe</button>
     </form>
+  </div>
 </body>
 </html>

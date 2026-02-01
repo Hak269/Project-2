@@ -1,24 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipes</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipes</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 900px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      margin-top: 40px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 25px;
+      display: inline-block;
+    }
+    .btn-new {
+      background: #27ae60;
+      color: #fff;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 14px;
+      margin-left: 15px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-new:hover {
+      background: #219150;
+    }
+    .recipe-card {
+      background: #fdfdfd;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 15px auto;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+    }
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+    .recipe-card p {
+      margin: 8px 0;
+      color: #34495e;
+    }
+    .recipe-card strong {
+      color: #27ae60;
+    }
+    .card-actions {
+      margin-top: 15px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 8px 14px;
+      margin-right: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .btn-edit {
+      background: #3498db;
+      color: #fff;
+    }
+    .btn-edit:hover {
+      background: #2980b9;
+    }
+    .btn-view {
+      background: #8e44ad;
+      color: #fff;
+    }
+    .btn-view:hover {
+      background: #732d91;
+    }
+    .btn-delete {
+      background: #e74c3c;
+      color: #fff;
+      border: none;
+    }
+    .btn-delete:hover {
+      background: #c0392b;
+    }
+  </style>
 </head>
 <body>
-    <h1>Recipes</h1>
+  <div class="container">
+    <h1>📖 Recipes</h1>
+    <a href="/recipe/create" class="btn-new">➕ New Recipe</a>
 
-    <% recipes.forEach(recipe => {%>
-        <p>Recipe Name: <%= recipe.recipeName %></p>
-        <p>Ingredients: <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
-        <p>Price: <%= recipe.price %> BD</p>
-        <p>Instructions: <%= recipe.instructions %></p>
+    <% recipes.forEach(recipe => { %>
+      <div class="recipe-card">
+        <p><strong>Recipe Name:</strong> <%= recipe.recipeName %></p>
+        <p><strong>Ingredients:</strong> <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
+        <p><strong>Price:</strong> <%= recipe.price %> BD</p>
 
-        <a href="/recipe/<%=recipe._id%>/edit">Edit</a>
-        <a href="/recipe/<%=recipe._id%>">View</a>
-        <form action="/recipe/<%= recipe._id %>/delete" method="post">
-            <button type="submit">Delete Recipe</button>
-        </form>
-        <% }); %>
+        <div class="card-actions">
+          <a href="/recipe/<%= recipe._id %>/edit" class="btn btn-edit">✏️ Edit</a>
+          <a href="/recipe/<%= recipe._id %>" class="btn btn-view">👁 View</a>
+          <form action="/recipe/<%= recipe._id %>/delete" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-delete">✖ Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+  </div>
 </body>
 </html>
