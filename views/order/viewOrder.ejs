@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order Details</title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+    <%- include('../navbar') %>
+  <div class="container">
+    <h1>📋 Order Details</h1>
+
+    <!-- General Order Info -->
+    <div class="order-info">
+      <p><strong>Order ID:</strong> <%= order._id %></p>
+      <p><strong>Order Type:</strong> <%= order.orderType %></p>
+      <p><strong>Served By:</strong> <%= order.servedBy.username %></p>
+      <p><strong>Total Price:</strong> <%= order.totalPrice %>BD</p>
+      <p><strong>Status:</strong> 
+        <% if (order.status === "Completed") { %>
+          <span class="completed-badge">✔ Completed</span>
+        <% } else { %>
+          <span style="color:#e67e22;">Pending</span>
+        <% } %>
+      </p>
+    </div>
+
+    <% order.dishes.forEach(dish => { %>
+      <div class="dish-card">
+        <h3><%= dish.dish.recipeName %></h3>
+        <p><strong>Quantity:</strong> <%= dish.quantity %></p>
+        <p><strong>Notes:</strong> <%= dish.specialRequest || 'None' %></p>
+        <p><strong>Price per item:</strong> <%= dish.dish.price %>BD</p>
+        <p><strong>Subtotal:</strong> <%= dish.dish.price * dish.quantity %>BD</p>
+      </div>
+    <% }) %>
+
+    <a href="/order" class="back-btn">⬅ Back to Orders</a>
+
+    <% if (order.status !== "Completed") { %>
+        <form action="/order/<%= order._id %>/delete" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-delete">✖ Delete Order</button>
+        </form>
+        <form action="/order/<%= order._id %>/complete" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-complete">✅ Mark as Complete</button>
+        </form>
+    <% } %>
+  </div>
+</body>
+</html>

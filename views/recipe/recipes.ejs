@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recipes</title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+  <%- include('../navbar') %>
+  <div class="container">
+    <h1>📖 Recipes</h1>
+    <a href="/recipe/create" class="btn-new">➕ New Recipe</a>
+
+    <% recipes.forEach(recipe => { %>
+      <div class="recipe-card">
+        <p><strong>Recipe Name:</strong> <%= recipe.recipeName %></p>
+        <p><strong>Ingredients:</strong> <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
+        <p><strong>Price:</strong> <%= recipe.price %> BD</p>
+
+        <div class="card-actions">
+          <a href="/recipe/<%= recipe._id %>/edit" class="btn btn-edit">✏️ Edit</a>
+          <a href="/recipe/<%= recipe._id %>" class="btn btn-view">👁 View</a>
+          <form action="/recipe/<%= recipe._id %>/delete" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-delete">✖ Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</body>
+</html>

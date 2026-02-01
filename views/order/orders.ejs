@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orders</title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+    <%- include('../navbar') %>
+    <div class="container">
+      <h1>📦 Orders</h1>
+      <a href="/order/create" class="btn-new">➕ New Order</a>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar">
+        <a href="/order" class="filter-btn">All</a>
+        <a href="/order?status=Pending" class="filter-btn">Pending</a>
+        <a href="/order?status=Completed" class="filter-btn">Completed</a>
+      </div>
+
+      <% allOrders.forEach(order => { %>
+        <div class="order-card">
+          <p><strong>Dishes:</strong><br>
+            <% order.dishes.forEach(dish => { %>
+              <span><%= dish.dish.recipeName %> x <%= dish.quantity %></span><br>
+            <% }) %>
+          </p>
+          <p><strong>Total Price:</strong> <%= order.totalPrice.toFixed(2) %>BD</p>
+          <p><strong>Order Type:</strong> <%= order.orderType %></p>
+          <p><strong>Served By:</strong> <%= order.servedBy.username %></p>
+          <p><strong>Status:</strong> <%= order.status %></p>
+
+          <div class="card-actions">
+            <a href="/order/<%= order._id %>" class="btn btn-details">🔍 View Details</a>
+            <% if (order.status !== "Completed") { %>
+              <form action="/order/<%= order._id %>/delete" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-delete">✖ Delete Order</button>
+              </form>
+              <form action="/order/<%= order._id %>/complete" method="post" style="display:inline;">
+                <button type="submit" class="btn btn-complete">✅ Mark as Complete</button>
+              </form>
+            <% } else { %>
+              <span style="color: #27ae60; font-weight: bold;">✔ Completed</span>
+            <% } %>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+</body>
+</html>

@@ -1,10 +1,17 @@
-<div>
-    <% if (user){ %>
-    <a href="/auth/sign-out">Logout</a>
-
-    <% } else{ %>
-    <a href="/auth/sign-up">Sign up</a>
-    <a href="/auth/sign-in">Login</a>
-
+<nav class="navbar">
+  <h2>🍴 My App</h2>
+  <ul class="nav-links">
+    <li><a href="/order">📦 Orders</a></li>
+    <li><a href="/recipe">📖 Recipes</a></li>
+    <li><a href="/inventory">📦 Inventory</a></li>
+  </ul>
+  <div class="auth-links">
+    <% if (user) { %>
+      <span>Welcome, <%= user.username %></span>
+      <a href="/auth/sign-out">Logout</a>
+    <% } else { %>
+      <a href="/auth/sign-up">Sign up</a>
+      <a href="/auth/sign-in">Login</a>
     <% } %>
-</div>
+  </div>
+</nav>

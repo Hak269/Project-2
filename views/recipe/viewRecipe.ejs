@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= recipe.recipeName %></title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+  <%- include('../navbar') %>
+  <div class="container">
+    <h1>📖 <%= recipe.recipeName %></h1>
+
+    <div class="ingredients">
+      <p><strong>Ingredients:</strong> <%= recipe.ingredients.map(item => item.item).join(", ") %></p>
+    </div>
+
+    <div class="price">
+      <p><strong>Price:</strong> <%= recipe.price %> BD</p>
+    </div>
+
+    <div class="instructions">
+      <p><strong>Instructions:</strong></p>
+      <ol>
+        <% recipe.instructions.forEach((step, index) => { %>
+          <li><%= step %></li>
+        <% }) %>
+      </ol>
+    </div>
+
+    <a href="/recipe" class="back-btn">⬅ Back to Recipes</a>
+  </div>
+</body>
+</html>

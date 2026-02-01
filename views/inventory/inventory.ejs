@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inventory</title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+    <%- include('../navbar') %>
+    <div class="container">
+    <h1>📦 Inventory</h1>
+    <a href="/inventory/create" class="btn-new">➕ Add Item</a>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <a href="/inventory" class="filter-btn">All</a>
+      <a href="/inventory?menuYN=true" class="filter-btn">In Menu</a>
+      <a href="/inventory?menuYN=false" class="filter-btn">Not in Menu</a>
+    </div>
+
+    <% inventory.forEach(item => { %>
+      <div class="item-card">
+        <p><strong>Item:</strong> <%= item.item %></p>
+        <p><strong>Category:</strong> <%= item.category %></p>
+        <p><strong>Quantity:</strong> <%= item.quantity %></p>
+        <p><strong>Unit:</strong> <%= item.unit %></p>
+        <p><strong>In Menu:</strong> <%= item.menuYN ? 'Yes' : 'No' %></p>
+
+        <div class="card-actions">
+          <a href="/inventory/<%= item._id %>/edit" class="btn btn-edit">✏️ Edit</a>
+          <form action="/inventory/<%= item._id %>/delete" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-delete">✖ Delete</button>
+          </form>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</body>
+</html>

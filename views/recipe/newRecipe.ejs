@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New Recipe</title>
+<link rel="stylesheet" href="/css/style.css"></head>
+<body>
+    <%- include('../navbar') %>
+    <div class="container">
+    <h1>➕ New Recipe</h1>
+    <form action="/recipe/create" method="post">
+      <label for="recipeName">Recipe Name:</label>
+      <input type="text" name="recipeName" id="recipeName" required>
+
+      <label for="ingredients">Ingredients:</label>
+      <select name="ingredients" id="ingredients" multiple required>
+        <% inventory.forEach(item => { %>
+          <option value="<%= item._id %>"><%= item.item %></option>
+        <% }); %>
+      </select>
+
+      <label for="price">Price (BD):</label>
+      <input type="text" name="price" id="price" required>
+
+      <label for="instructions">Instructions (one line per step):</label>
+      <textarea id="instructions" name="instructions" rows="10" required></textarea>
+
+      <button type="submit">✅ Add Recipe</button>
+    </form>
+  </div>
+</body>
+</html>

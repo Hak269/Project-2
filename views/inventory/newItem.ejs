@@ -4,73 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>New Inventory Item</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #fdfbfb, #ebedee);
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
-    .container {
-      max-width: 700px;
-      width: 100%;
-      background: #fff;
-      padding: 30px;
-      margin-top: 40px;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #2c3e50;
-      text-align: center;
-      margin-bottom: 25px;
-    }
-    label {
-      display: block;
-      margin: 12px 0 6px;
-      font-weight: bold;
-      color: #34495e;
-    }
-    input[type="text"], input[type="number"], select {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 14px;
-      margin-bottom: 15px;
-      transition: border 0.3s ease;
-    }
-    input[type="text"]:focus, input[type="number"]:focus, select:focus {
-      border-color: #3498db;
-      outline: none;
-    }
-    .checkbox-group {
-      margin: 10px 0;
-      color: #34495e;
-    }
-    button {
-      background: #27ae60;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 16px;
-      transition: background 0.3s ease;
-      display: block;
-      margin: 0 auto;
-    }
-    button:hover {
-      background: #219150;
-    }
-  </style>
-</head>
+<link rel="stylesheet" href="/css/style.css"></head>
 <body>
-  <div class="container">
+    <%- include('../navbar') %>
+    <div class="container">
     <h1>➕ New Inventory Item</h1>
     <form action="/inventory/create" method="post">
       <label for="item">Item</label>
